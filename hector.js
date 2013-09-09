@@ -195,7 +195,7 @@
         // Dummy keyboard handler
         Crafty.e("2D, DOM").bind("KeyDown", function (e) {
             if (e.key === Crafty.keys.SPACE) {
-                Crafty.audio.stop("chipstep");
+                Crafty.audio.stop();
                 Crafty.scene("menu");
             }
         });
@@ -227,13 +227,10 @@
             this.css({
                 "word-wrap": "break-word",
                 "white-space": "pre",
-                "overflow": "hidden",
-                "font-size": "16px",
-                "line-height": "16px",
-                "font-family": "'Press Start 2P', cursive",
-                //"font-weight": "bold",
-                "color": getColor(typeof kwargs.color !== "undefined" ? kwargs.color : 14)
+                "overflow": "hidden"
             });
+            this.textFont({family: "'Press Start 2P', cursive", size: "16px/1"});
+            this.textColor(getColor(typeof kwargs.color !== "undefined" ? kwargs.color : 14));
 
             this.bind("EnterFrame", this.frameHandler);
             // Handle input too! :D
@@ -309,7 +306,7 @@
         },
 
         setFgColor: function (index) {
-            this.css({"color": getColor(index)});
+            this.textColor(getColor(index));
         },
 
         setBgColor: function (index) {
@@ -396,20 +393,16 @@
             this.bind("NewDirection", function (e) {
                 if (e.x || e.y) {
                     if (e.y > 0 && ! this.isPlaying("walk_down")) {
-                        this.stop();
-                        this.animate("walk_down", 10, -1);
+                        this.playAnimation("walk_down", 10, -1);
                     } else if (e.y < 0 && ! this.isPlaying("walk_up")) {
-                        this.stop();
-                        this.animate("walk_up", 10, -1);
+                        this.playAnimation("walk_up", 10, -1);
                     } else if (e.x > 0 && ! this.isPlaying("walk_right")) {
-                        this.stop();
-                        this.animate("walk_right", 10, -1);
+                        this.playAnimation("walk_right", 10, -1);
                     } else if (e.x < 0 && ! this.isPlaying("walk_left")) {
-                        this.stop();
-                        this.animate("walk_left", 10, -1);
+                        this.playAnimation("walk_left", 10, -1);
                     }
                 } else {
-                    this.stop();
+                    this.pauseAnimation();
                 }
             });
 
