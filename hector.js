@@ -416,6 +416,19 @@
                     }
                 });
         },
+        actions: {
+            HELP: "Try to 'look' at things.",
+            DIE: {
+                quips: [
+                    "2B||!2B.",
+                    "Too easy.",
+                    "What for?"
+                ],
+                toString: function () {
+                    return this.quips[Math.round(Math.random() * (this.quips.length - 1))];
+                }
+            }
+        },
         runCommand: function (cmdline) {
             var i, l, cmd, args, actionCount = 0;
             var items = this.hit("Item");
@@ -424,8 +437,8 @@
             cmd = args[0];
             args[0] = this;
 
-            if (cmd === "HELP") {
-                this.say("Try to 'look' at things.");
+            if (this.actions.hasOwnProperty(cmd)) {
+                this.say(this.actions[cmd]);
                 actionCount ++;
             }
 
@@ -444,6 +457,10 @@
         },
         say: function (message) {
             var i, y, diff = 0;
+
+            if (typeof message !== 'string') {
+                message = String(message);
+            }
 
             if (this._lastMessage) {
                 diff = this._lastMessage.length - message.length;
@@ -540,12 +557,29 @@
         init: function () {
             this.requires("2D, DOM, rubikscube, Item");
             this.w = this.h = 16;
+            this.attempts = 0;
+            this.solved = false;
             this.actions = {
                 SOLVE: function (actor) {
-                    actor.say("Hector has no skillz");
+                    if (this.attempts < 10) {
+                        actor.say("Hector has no skillz");
+                    } else if (this.attempts < 100) {
+                        actor.say("Hector has some skillz");
+                    } else if (this.attempts < 1000) {
+                        actor.say("Hector has mad skillz");
+                    } else if (this.attempts >= 1000) {
+                        this.solved = true;
+                        actor.say("Done.");
+                    }
+
+                    this.attempts++;
                 },
                 LOOK: function (actor) {
-                    actor.say("An unsolved Rubik's Cube");
+                    if (this.solved) {
+                        actor.say("A solved Rubik's Cube");
+                    } else {
+                        actor.say("An unsolved Rubik's Cube");
+                    }
                 }
             };
         }
