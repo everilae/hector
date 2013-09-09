@@ -135,10 +135,10 @@
         });
 
         // Create boundaries
-        Crafty.e("Boundary").createBoundary({x: 0,   y: 0,   w: 640, h: 280});
-        Crafty.e("Boundary").createBoundary({x: 0,   y: 384, w: 640, h: 96});
-        Crafty.e("Boundary").createBoundary({x: 0,   y: 0,   w: 48,  h: 480});
-        Crafty.e("Boundary").createBoundary({x: 592, y: 0,   w: 48,  h: 480});
+        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 640, h: 280}, new Crafty.polygon([0, 0], [639, 0], [639, 279], [0, 279]));
+        Crafty.e("Boundary").createBoundary({x: 0, y: 384, w: 640, h: 96},  new Crafty.polygon([0, 0], [639, 0], [639, 95],  [0, 95]));
+        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
+        Crafty.e("Boundary").createBoundary({x: 592, y: 0, w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
 
         // Create player
         hector = Crafty.e("Hector").attr({x: 200, y: 280});
@@ -162,10 +162,10 @@
         //Crafty.e("2D, Canvas, Image").image("hector-room2.png").attr({x: 48, y: 48});
 
         // Create boundaries
-        Crafty.e("Boundary").createBoundary({x: 0,   y: 0,   w: 640, h: 280});
-        Crafty.e("Boundary").createBoundary({x: 0,   y: 384, w: 640, h: 96});
-        Crafty.e("Boundary").createBoundary({x: 0,   y: 0,   w: 48,  h: 480});
-        Crafty.e("Boundary").createBoundary({x: 592, y: 0,   w: 48,  h: 480});
+        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 640, h: 280}, new Crafty.polygon([0, 0], [639, 0], [639, 279], [0, 279]));
+        Crafty.e("Boundary").createBoundary({x: 0, y: 384, w: 640, h: 96},  new Crafty.polygon([0, 0], [639, 0], [639, 95],  [0, 95]));
+        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
+        Crafty.e("Boundary").createBoundary({x: 592, y: 0, w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
 
         // Create player
         hector = Crafty.e("Hector").attr({x: 200, y: 280});
@@ -626,10 +626,10 @@
         init: function () {
             this.requires("2D");
         },
-        createBoundary: function (attrs) {
+        createBoundary: function (attrs, polygon) {
             this.attr(attrs);
             this.addComponent("Collision");
-            this.collision();
+            this.collision(polygon);
             return this;
         }
     });
