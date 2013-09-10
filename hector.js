@@ -417,16 +417,18 @@
             this.animate("walk_left", [[192, 0], [224, 0], [256, 0]]);
             this.animate("walk_up", [[288, 0], [320, 0], [352, 0]]);
 
+            this.animFrames = 15;
+
             this.bind("NewDirection", function (e) {
                 if (e.x || e.y) {
                     if (e.y > 0 && ! this.isPlaying("walk_down")) {
-                        this.playAnimation("walk_down", 10, -1);
+                        this.playAnimation("walk_down", this.animFrames, -1);
                     } else if (e.y < 0 && ! this.isPlaying("walk_up")) {
-                        this.playAnimation("walk_up", 10, -1);
+                        this.playAnimation("walk_up", this.animFrames, -1);
                     } else if (e.x > 0 && ! this.isPlaying("walk_right")) {
-                        this.playAnimation("walk_right", 10, -1);
+                        this.playAnimation("walk_right", this.animFrames, -1);
                     } else if (e.x < 0 && ! this.isPlaying("walk_left")) {
-                        this.playAnimation("walk_left", 10, -1);
+                        this.playAnimation("walk_left", this.animFrames, -1);
                     }
                 } else {
                     this.pauseAnimation();
