@@ -135,7 +135,7 @@
         });
 
         // Create boundaries
-        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 640, h: 280}, new Crafty.polygon([0, 0], [639, 0], [639, 279], [0, 279]));
+        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 640, h: 280}, new Crafty.polygon([0, 0], [639, 0], [639, 245], [439, 279], [300, 279], [0, 255]));
         Crafty.e("Boundary").createBoundary({x: 0, y: 384, w: 640, h: 96},  new Crafty.polygon([0, 0], [639, 0], [639, 95],  [0, 95]));
         Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
         Crafty.e("Boundary").createBoundary({x: 592, y: 0, w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
@@ -162,7 +162,7 @@
         //Crafty.e("2D, Canvas, Image").image("hector-room2.png").attr({x: 48, y: 48});
 
         // Create boundaries
-        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 640, h: 280}, new Crafty.polygon([0, 0], [639, 0], [639, 279], [0, 279]));
+        Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 640, h: 280}, new Crafty.polygon([0, 0], [639, 0], [639, 279], [0, 10]));
         Crafty.e("Boundary").createBoundary({x: 0, y: 384, w: 640, h: 96},  new Crafty.polygon([0, 0], [639, 0], [639, 95],  [0, 95]));
         Crafty.e("Boundary").createBoundary({x: 0, y: 0,   w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
         Crafty.e("Boundary").createBoundary({x: 592, y: 0, w: 48,  h: 480}, new Crafty.polygon([0, 0], [47, 0],  [47, 479],  [0, 479]));
@@ -629,6 +629,7 @@
         createBoundary: function (attrs, polygon) {
             this.attr(attrs);
             this.addComponent("Collision");
+            //this.addComponent("WiredHitBox");
             this.collision(polygon);
             return this;
         }
