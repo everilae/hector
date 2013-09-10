@@ -259,6 +259,8 @@
             this.textFont({family: "'Press Start 2P', cursive", size: "16px/1"});
             this.textColor(getColor(typeof kwargs.color !== "undefined" ? kwargs.color : 14));
 
+            this.unselectable();
+
             this.bind("EnterFrame", this.frameHandler);
             // Handle input too! :D
             this.bind("KeyDown", this.keyHandler);
