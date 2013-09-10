@@ -81,17 +81,17 @@
                 "crackmask.png"
             ],
             function () {
-            Crafty.sprite("hector.png", {
-                hector: [0, 0, 32, 80]
-            });
-            Crafty.sprite("rubikscube.png", {
-                rubikscube: [0, 0, 16, 16]
-            });
-            loaded = true;
-        });
+                Crafty.sprite("hector.png", {
+                    hector: [0, 0, 32, 80]
+                });
+                Crafty.sprite("rubikscube.png", {
+                    rubikscube: [0, 0, 16, 16]
+                });
+                loaded = true;
+            }
+        );
 
-        // Dummy entity for frame handling
-        Crafty.e("2D, DOM").bind("EnterFrame", function (e) {
+        Crafty.bind("EnterFrame", function enterFrameCallback(e) {
             Crafty.background(getColor(Math.floor(e.frame / 10) % 16));
 
             if (e.frame % 20 === 0) {
@@ -99,6 +99,7 @@
             }
 
             if (loaded && e.frame >= 400) {
+                Crafty.unbind("EnterFrame", enterFrameCallback);
                 Crafty.scene("intro");
             }
         });
@@ -114,9 +115,9 @@
         console.write("*** Hector's House ***", 6, 1);
         console.write("Press space to play.", 7, 3);
 
-        // Dummy entity for keyboard handling
-        Crafty.e("2D, DOM").bind("KeyDown", function(e) {
+        Crafty.bind("KeyDown", function keyDownCallback(e) {
             if (e.key === Crafty.keys.SPACE) {
+                Crafty.unbind("KeyDown", keyDownCallback);
                 Crafty.scene("house");
             }
         });
@@ -192,13 +193,15 @@
         console.setFgColor(4);
         console.clear();
         console.put("Press space", 4, 11);
-        // Dummy keyboard handler
-        Crafty.e("2D, DOM").bind("KeyDown", function (e) {
+
+        Crafty.bind("KeyDown", function keyDownCallback(e) {
             if (e.key === Crafty.keys.SPACE) {
-                Crafty.audio.stop();
+                Crafty.unbind("KeyDown", keyDownCallback);
                 Crafty.scene("menu");
             }
         });
+    }, function () {
+        Crafty.audio.stop();
     });
 
 /******************************************************************************
