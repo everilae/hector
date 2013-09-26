@@ -245,7 +245,7 @@
             this.isDirty = false;
             this.cursor = new Cursor();
             // Generates an array of 34 * 24 spaces
-            this.mem = (new Array(34 * 24)).join(" ").split("");
+            this.mem = (new Array(34 * 24 + 1)).join(" ").split("");
             this.inputBuffer = [];
 
             this.attr(this.AREA);
